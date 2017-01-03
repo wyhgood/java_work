@@ -1,0 +1,36 @@
+package com.travel.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity(name="rawid_mergeid_mapping")
+public class RawIdMergeIdMapping implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1536955753438673776L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	@Embedded
+	RawIdMergeEmbeddedId embeddedId;
+	public RawIdMergeEmbeddedId getEmbeddedId() {
+		return embeddedId;
+	}
+	public void setEmbeddedId(RawIdMergeEmbeddedId embeddedId) {
+		this.embeddedId = embeddedId;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	
+}
