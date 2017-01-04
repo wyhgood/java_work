@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.travel.comment</groupId>
-	<artifactId>comment-generate</artifactId>
+	<artifactId>daily_work</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
