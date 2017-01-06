@@ -32,7 +32,7 @@ public class SynPicSource implements InitializingBean {
 		int start = 0;
 		int end = 0;
 		int size = ids.size();
-		int batch = 5000000;
+		int batch = 100000;
 		
 		while(start < size){
 			end = start+batch;
