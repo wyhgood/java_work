@@ -78,8 +78,8 @@ public class DropDaoDaoPic implements InitializingBean{
 
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
-		String sql = "select id from raw_data where IdInfo_strSource='daodao'";
-		rawIds = nativeRepository.queryIntResult(sql);
-		log.info("ids size is:"+rawIds.size());
+//		String sql = "select id from raw_data where IdInfo_strSource='daodao'";
+//		rawIds = nativeRepository.queryIntResult(sql);
+//		log.info("ids size is:"+rawIds.size());
 	}	
 }

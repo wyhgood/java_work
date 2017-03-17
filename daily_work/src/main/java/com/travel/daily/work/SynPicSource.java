@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.travel.bak.repository.bak.NativeBakRepository;
 import com.travel.repository.NativeRepository;
 
+
 @Component
 public class SynPicSource implements InitializingBean {
 	static public final Log log = LogFactory.getLog(SynPicSource.class);
@@ -110,8 +111,8 @@ public class SynPicSource implements InitializingBean {
 
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
-		String sql = "select id from pic_info where source<=0";
-		ids = nativeRepository.queryIntResult(sql);
-		log.info("ids size is:"+ids.size());
+//		String sql = "select id from pic_info where source<=0";
+//		ids = nativeRepository.queryIntResult(sql);
+//		log.info("ids size is:"+ids.size());
 	}
 }
