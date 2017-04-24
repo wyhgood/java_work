@@ -17,4 +17,6 @@ public interface MergeIdEntityRepository extends
 
 	@Query("select m from MergeIdEntity m where m.id>:id")
 	public List<MergeIdEntity> findFromId(@Param("id") Long id);
+	@Query("select id from MergeIdEntity")
+	public List<Long> findAllId();
 }

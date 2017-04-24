@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +20,6 @@ import com.travel.data.Pair;
 
 public class FileUtils {
 	static public final Log log = LogFactory.getLog(FileUtils.class);
-	
 	public static String readStrFromFile(String fileName){
 		StringBuilder sb = new StringBuilder();
 		File file = new File(fileName);
@@ -46,7 +44,35 @@ public class FileUtils {
 		}
 		return sb.toString();
 	}
-	public static List<Integer> readIntegerLinesFromFile(String fileName){
+	static public List<String> readLinesFromFile(String filename) {
+		List<String> list = new ArrayList<String>();
+		File file = new File(filename);
+		if(!file.exists()){
+			log.error("file doesn't exist:"+filename);
+			return list;
+		}
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8"));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				line = line.trim();
+				if(!line.isEmpty()&&!line.equals("\\N"))list.add(line);
+			}
+		} catch (IOException e) {
+			log.warn("exception",e);
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					log.warn("exception",e);
+				}
+			}
+		}
+		return list;
+	}
+	public static List<Integer> readIntegerListFromFile(String fileName){
 		List<Integer> results = new LinkedList<Integer>();
 		File file = new File(fileName);
 		BufferedReader br = null;
@@ -69,60 +95,6 @@ public class FileUtils {
 			}
 		}
 		return results;
-	}
-	public static Set<Integer> readIntegerSetLinesFromFile(String fileName){
-		Set<Integer> resultSet = new HashSet<Integer>();
-		File file = new File(fileName);
-		BufferedReader br = null;
-		try{
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-			String line = br.readLine();
-			while(line != null){
-				resultSet.add(Integer.parseInt(line.trim()));
-				line = br.readLine();
-			}
-		}catch(Exception e){
-			log.info("exception.", e);
-		}finally{
-			if(br != null){
-				try {
-					br.close();
-				} catch (IOException e) {
-					log.info("exception.", e);
-				}
-			}
-		}
-		
-		return resultSet;
-	}
-	
-	static public List<String> readLinesFromFile(String filename) {
-		List<String> list = new ArrayList<String>();
-		File file = new File(filename);
-		if(!file.exists()){
-			log.error("file doesn't exist:"+filename);
-			return list;
-		}
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(filename));
-			String line = null;
-			while ((line = br.readLine()) != null) {
-				line = line.trim();
-				if(!line.isEmpty()&&!line.equals("\\N"))list.add(line);
-			}
-		} catch (IOException e) {
-			log.warn("exception",e);
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					log.warn("exception",e);
-				}
-			}
-		}
-		return list;
 	}
 	static public void writeFile(List<String> contents,String file){
 		BufferedWriter writer = null;
@@ -181,5 +153,30 @@ public class FileUtils {
 				}
 			}
 		}
+	}
+	public static Set<Integer> readIntegerLinesFromFile(String fileName){
+		Set<Integer> resultSet = new HashSet<Integer>();
+		File file = new File(fileName);
+		BufferedReader br = null;
+		try{
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+			String line = br.readLine();
+			while(line != null){
+				resultSet.add(Integer.parseInt(line.trim()));
+				line = br.readLine();
+			}
+		}catch(Exception e){
+			log.info("exception.", e);
+		}finally{
+			if(br != null){
+				try {
+					br.close();
+				} catch (IOException e) {
+					log.info("exception.", e);
+				}
+			}
+		}
+		
+		return resultSet;
 	}
 }
